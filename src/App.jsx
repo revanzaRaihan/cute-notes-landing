@@ -13,6 +13,8 @@ import {
   Trash2, 
   Smile
 } from 'lucide-react'
+import Lenis from 'lenis'
+import 'lenis/dist/lenis.css'
 import './App.css'
 
 // Custom Github Icon SVG to avoid bundler import mismatch issues
@@ -78,6 +80,53 @@ function App() {
       sections.forEach(id => {
         const el = document.getElementById(id)
         if (el) observer.unobserve(el)
+      })
+    }
+  }, [])
+
+  // Initialize Lenis Smooth Scroll
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.5,
+      infinite: false,
+    })
+
+    function raf(time) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf)
+
+    // Smooth scroll on anchor link clicks
+    const handleAnchorClick = (e) => {
+      const href = e.currentTarget.getAttribute('href')
+      if (href && href.startsWith('#') && href !== '#') {
+        e.preventDefault()
+        const targetElement = document.getElementById(href.substring(1))
+        if (targetElement) {
+          lenis.scrollTo(targetElement)
+        }
+      }
+    }
+
+    const links = document.querySelectorAll('a[href^="#"]')
+    links.forEach(link => {
+      if (link.getAttribute('href') !== '#') {
+        link.addEventListener('click', handleAnchorClick)
+      }
+    })
+
+    return () => {
+      lenis.destroy()
+      links.forEach(link => {
+        link.removeEventListener('click', handleAnchorClick)
       })
     }
   }, [])
