@@ -136,7 +136,7 @@ function App() {
           <a href="#gallery" className="nav-link" id="nav-gallery-link">Gallery</a>
           <a href="#get-started" className="nav-link" id="nav-get-started-link">Get Started</a>
           <a 
-            href="https://github.com" 
+            href="https://github.com/revanzaRaihan/cute-notes-landing" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="nav-link"
@@ -164,7 +164,7 @@ function App() {
         </p>
 
         <div className="hero-cta" id="hero-actions">
-          <a href="#get-started" className="btn btn-primary" id="btn-download">
+          <a href="/CuteNotes-Setup.exe" download="CuteNotes-Setup.exe" className="btn btn-primary" id="btn-download">
             <Download size={18} />
             Get Desktop App
           </a>
