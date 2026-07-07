@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&family=Outfit:wght@300..900&display=swap');
+
+:root {
+  /* Pastel Palette */
+  --pastel-pink-bg: #ffccd5;
+  --pastel-pink-text: #8b3846;
+  --pastel-lavender-bg: #e8dbfc;
+  --pastel-lavender-text: #593e7d;
+  --pastel-peach-bg: #ffe5d9;
+  --pastel-peach-text: #8e583f;
+  --pastel-mint-bg: #d8f3dc;
+  --pastel-mint-text: #2d6a4f;
+  --pastel-yellow-bg: #fff2b2;
+  --pastel-yellow-text: #7c6710;
+  
+  /* Primary Theme Variables */
+  --primary: #ff8fab;
+  --primary-hover: #ff7096;
+  --primary-light: #ffe5ec;
+  
+  --bg-app: #faf8f5;
+  --bg-card: #ffffff;
+  --text-main: #4a3e3d;
+  --text-heading: #2d2221;
+  --border-color: #ebdcd5;
+  --grid-line: rgba(74, 62, 61, 0.05);
+  
+  --shadow-sm: 0 4px 6px -1px rgba(100, 80, 80, 0.05), 0 2px 4px -1px rgba(100, 80, 80, 0.03);
+  --shadow-md: 0 10px 15px -3px rgba(100, 80, 80, 0.08), 0 4px 6px -2px rgba(100, 80, 80, 0.05);
+  --shadow-lg: 0 20px 25px -5px rgba(100, 80, 80, 0.12), 0 10px 10px -5px rgba(100, 80, 80, 0.06);
+  --shadow-notebook: 5px 5px 0px rgba(0, 0, 0, 0.05);
+  
+  --font-title: 'Fredoka', 'Quicksand', system-ui, sans-serif;
+  --font-body: 'Quicksand', 'Outfit', system-ui, sans-serif;
+  --font-mono: 'Outfit', monospace;
+
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-main);
+  background: var(--bg-app);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  color: var(--text-heading);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+/* Notebook lined pattern utility */
+.lined-paper {
+  background-color: var(--bg-card);
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px);
+  background-size: 100% 28px;
+  line-height: 28px;
+  position: relative;
+}
+
+.lined-paper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 40px;
+  width: 2px;
+  height: 100%;
+  background-color: rgba(255, 143, 171, 0.3);
+}
+
+/* Interactive elements */
+button, a.btn {
+  font-family: var(--font-title);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button:active, a.btn:active {
+  transform: scale(0.96);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-app);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-light);
+  border: 2px solid var(--bg-app);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Washi Tape Accent */
+.washi-tape {
+  height: 30px;
+  width: 120px;
+  background-color: var(--primary-light);
+  opacity: 0.85;
+  box-shadow: 0px 2px 4px rgba(0,0,0,0.05);
+  border-left: 3px dashed rgba(255,255,255,0.5);
+  border-right: 3px dashed rgba(255,255,255,0.5);
+  transform: rotate(-3deg);
+  z-index: 10;
+}
+
+/* Keyframe animations */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ribbon-slide {
+  from { background-position: 0 0; }
+  to { background-position: 40px 0; }
+}
+
+.float-animation {
+  animation: float 4s ease-in-out infinite;
+}
+
+.spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
