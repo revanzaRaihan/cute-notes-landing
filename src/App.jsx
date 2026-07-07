@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { 
   Sparkles, 
   Palette, 
@@ -47,6 +47,40 @@ function App() {
   // Terminal commands state
   const [terminalTab, setTerminalTab] = useState('install')
   const [copied, setCopied] = useState(false)
+
+  // Scroll Spy state
+  const [activeSection, setActiveSection] = useState('hero')
+
+  useEffect(() => {
+    const sections = ['hero', 'features', 'playground', 'gallery', 'get-started']
+    const observerOptions = {
+      root: null,
+      rootMargin: '-30% 0px -60% 0px',
+      threshold: 0
+    }
+
+    const observerCallback = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id)
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions)
+    
+    sections.forEach(id => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+
+    return () => {
+      sections.forEach(id => {
+        const el = document.getElementById(id)
+        if (el) observer.unobserve(el)
+      })
+    }
+  }, [])
 
   // Color options maps
   const colorMap = {
@@ -131,10 +165,34 @@ function App() {
           <span className="logo-badge">v1.0.0</span>
         </a>
         <nav className="nav-links">
-          <a href="#features" className="nav-link" id="nav-features-link">Features</a>
-          <a href="#playground" className="nav-link" id="nav-playground-link">Design Sandbox</a>
-          <a href="#gallery" className="nav-link" id="nav-gallery-link">Gallery</a>
-          <a href="#get-started" className="nav-link" id="nav-get-started-link">Get Started</a>
+          <a 
+            href="#features" 
+            className={`nav-link ${activeSection === 'features' ? 'active' : ''}`} 
+            id="nav-features-link"
+          >
+            Features
+          </a>
+          <a 
+            href="#playground" 
+            className={`nav-link ${activeSection === 'playground' ? 'active' : ''}`} 
+            id="nav-playground-link"
+          >
+            Design Sandbox
+          </a>
+          <a 
+            href="#gallery" 
+            className={`nav-link ${activeSection === 'gallery' ? 'active' : ''}`} 
+            id="nav-gallery-link"
+          >
+            Gallery
+          </a>
+          <a 
+            href="#get-started" 
+            className={`nav-link ${activeSection === 'get-started' ? 'active' : ''}`} 
+            id="nav-get-started-link"
+          >
+            Get Started
+          </a>
           <a 
             href="https://github.com/revanzaRaihan/cute-notes-landing" 
             target="_blank" 
